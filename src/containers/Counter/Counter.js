@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../store/actions';
+import * as actionCreators from '../../store/actions/actions';
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 
 class Counter extends Component {
 
     counterChangedHandler = ( action, value ) => {
+        // eslint-disable-next-line default-case
         switch ( action ) {
             case 'inc':
                 this.setState( ( prevState ) => { return { counter: prevState.counter + 1 } } )
@@ -52,12 +53,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrementCounter: () => dispatch({type: actionTypes.INCREMENT}),
-        onDecrementCounter: () => dispatch({type: actionTypes.DECREMENT}),
-        onAddCounter: () => dispatch({type: actionTypes.ADD, val:5}),
-        onSubstractCounter: () => dispatch({type: actionTypes.SUBSTRACT, val:5}),
-        onStoreResults:(result) => dispatch({type: actionTypes.STORE_RESULTS, result: result }),
-        onDeleteResults:(id) => dispatch({type: actionTypes.DELETE_RESULTS, resultElId:id})
+        onIncrementCounter: () => dispatch(actionCreators.increment()),
+        onDecrementCounter: () => dispatch(actionCreators.decrement()),
+        onAddCounter: () => dispatch(actionCreators.add(5)),
+        onSubstractCounter: () => dispatch(actionCreators.substract(5)),
+        onStoreResults:(result) => dispatch(actionCreators.storeResult(result)),
+        onDeleteResults:(id) => dispatch(actionCreators.storeResult(id))
 
     };
 }
